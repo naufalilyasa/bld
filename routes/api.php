@@ -41,3 +41,14 @@ Route::group([
     Route::patch('/{id}', 'DocumentController@update');
     Route::delete('/{id?}', 'DocumentController@destroy');
 });
+
+// Untuk borrowers
+Route::group([
+    'middleware' => 'auth:api',
+    'prefix'     => 'borrowers',
+    'namespace'  => 'API'
+], function () {
+    Route::post('/borrows/{id?}', 'BorrowController@borrows'); // pinjam
+    Route::patch('/returns/{id?}', 'BorrowController@returns'); // pengembalian
+    Route::patch('/confirms/{id?}', 'BorrowController@confirms'); // konfirmasi
+});

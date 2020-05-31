@@ -39,6 +39,8 @@ class ApiRolesAndPermissionsSeeder extends Seeder
             'update a document',
             'delete a document',
             'delete documents',
+            'borrow a document',
+            'borrow documents',
             'confirm a returned document',
             'confirm returned documents'
         ]);

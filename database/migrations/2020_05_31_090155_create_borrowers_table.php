@@ -15,15 +15,17 @@ class CreateBorrowersTable extends Migration
     {
         Schema::create('borrowers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('document_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('document_id'); // document id
+            $table->unsignedBigInteger('borrower_id'); // yang minjem
+            $table->unsignedBigInteger('owner_id'); // yang punya
             $table->boolean('is_borrowed');
-            $table->boolean('is_return_confirmed');
+            $table->unsignedTinyInteger('return_status');
             $table->timestamps();
 
             // pasang foreign key
             $table->foreign('document_id')->references('id')->on('documents');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('borrower_id')->references('id')->on('users');
+            $table->foreign('owner_id')->references('id')->on('users');
         });
     }
 
@@ -37,7 +39,8 @@ class CreateBorrowersTable extends Migration
         // lepas foreign key
         Schema::table('borrowers', function (Blueprint $table) {
             $table->dropForeign(['document_id']);
-            $table->dropForeign(['user_id']);
+            $table->dropForeign(['borrower_id']);
+            $table->dropForeign(['owner_id']);
         });
 
         Schema::dropIfExists('borrowers');

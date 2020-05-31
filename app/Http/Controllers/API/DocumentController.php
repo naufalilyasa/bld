@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\API\StoreDocumentRequest;
 use App\Http\Requests\API\UpdateDocumentRequest;
 use App\Http\Requests\API\DestroyDocumentRequest;
-use App\Http\Resources\DocumentCollection;
+use App\Http\Resources\API\DocumentCollection;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
@@ -42,7 +42,11 @@ class DocumentController extends Controller
         $data['published_at'] = new Carbon($data['published_at']);
 
         // Simpan
-        $document = Document::create($data);
+        $user = auth('api')->user();
+        $document = new Document;
+        $document->user_id = $user->id;
+        $document->fill($data);
+        $document->save();
 
         return response()->json($document, 201);
 
