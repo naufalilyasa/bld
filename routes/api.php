@@ -29,3 +29,15 @@ Route::group([
     Route::post('/refresh', 'AuthController@refresh');
     Route::post('/me', 'AuthController@me');
 });
+
+// Untuk documents
+Route::group([
+    'middleware'    => 'auth:api',
+    'prefix'        => 'documents',
+    'namespace'     => 'API'
+], function () {
+    Route::get('/{id?}', 'DocumentController@index');
+    Route::post('/', 'DocumentController@store');
+    Route::patch('/{id}', 'DocumentController@update');
+    Route::delete('/{id?}', 'DocumentController@destroy');
+});

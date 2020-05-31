@@ -15,6 +15,7 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('author');
             $table->string('publisher');
@@ -24,6 +25,8 @@ class CreateDocumentsTable extends Migration
             $table->string('location');
             $table->timestamp('published_at');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -34,6 +37,10 @@ class CreateDocumentsTable extends Migration
      */
     public function down()
     {
+        Schema::table('documents', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+
         Schema::dropIfExists('documents');
     }
 }
