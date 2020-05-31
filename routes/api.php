@@ -52,3 +52,12 @@ Route::group([
     Route::patch('/returns/{id?}', 'BorrowController@returns'); // pengembalian
     Route::patch('/confirms/{id?}', 'BorrowController@confirms'); // konfirmasi
 });
+
+// Untuk users
+Route::group([
+    'middleware' => 'auth:api',
+    'prefix' => 'users',
+    'namespace' => 'API'
+], function () {
+    Route::get('/{id?}', 'UserController@index');
+});

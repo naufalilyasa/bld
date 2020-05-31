@@ -30,6 +30,8 @@ class ApiRolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'borrow documents', 'guard_name' => 'api']);
         Permission::create(['name' => 'return a document', 'guard_name' => 'api']);
         Permission::create(['name' => 'return documents', 'guard_name' => 'api']);
+        Permission::create(['name' => 'read users', 'guard_name' => 'api']);
+        Permission::create(['name' => 'read a user', 'guard_name' => 'api']);
 
         // Buat role dosen
         ApiRole::create(['name' => 'lecturer'])->givePermissionTo([
@@ -42,7 +44,9 @@ class ApiRolesAndPermissionsSeeder extends Seeder
             'borrow a document',
             'borrow documents',
             'confirm a returned document',
-            'confirm returned documents'
+            'confirm returned documents',
+            'read users',
+            'read a user'
         ]);
 
         // Buat role mahasiswa/i

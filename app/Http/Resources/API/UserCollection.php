@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\API;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class DocumentCollection extends ResourceCollection
+class UserCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -14,11 +14,6 @@ class DocumentCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return [
-            'data' => $this->collection,
-            'links' => [
-                'self' => 'link-value',
-            ],
-        ];
+        return parent::toArray($request);
     }
 }
