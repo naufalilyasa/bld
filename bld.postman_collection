@@ -1,0 +1,692 @@
+{
+	"info": {
+		"_postman_id": "be028f0b-6f88-4a40-8642-5083a6529da7",
+		"name": "Spectre",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign in",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "root@localhost",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "root",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URI}}/api/auth/signin",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URI}}/api/auth/refresh",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "koikoi@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "koi",
+									"type": "text"
+								},
+								{
+									"key": "registration_number",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "jl kober",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URI}}/api/auth/signup",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URI}}/api/auth/me",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Documents",
+			"item": [
+				{
+					"name": "Get all documents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URI}}/api/documents?page=1",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"documents"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get document by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URI}}/api/documents/:id",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"documents",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add document",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "test2",
+									"type": "text"
+								},
+								{
+									"key": "author",
+									"value": "2test",
+									"type": "text"
+								},
+								{
+									"key": "publisher",
+									"value": "2test",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "2test",
+									"type": "text"
+								},
+								{
+									"key": "items_available",
+									"value": "99",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "2test",
+									"type": "text"
+								},
+								{
+									"key": "published_at",
+									"value": "09/02/2000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URI}}/api/documents",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit document",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "x",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URI}}/api/documents/:id",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"documents",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove document",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URI}}/api/documents/:id",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"documents",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove multiple documents",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ids",
+									"value": "2,3,4,5,99",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URI}}/api/documents/",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"documents",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Borrows",
+			"item": [
+				{
+					"name": "Borrow a document",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URI}}/api/borrowers/borrows/:id",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"borrowers",
+								"borrows",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "17"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrow multiple documents",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ids",
+									"value": "19,20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URI}}/api/borrowers/borrows",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"borrowers",
+								"borrows"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Return a document",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URI}}/api/borrowers/returns/:id",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"borrowers",
+								"returns",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Return multiple documents",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ids",
+									"value": "19,20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URI}}/api/borrowers/returns",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"borrowers",
+								"returns"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm a document",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URI}}/api/borrowers/confirms/:id",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"borrowers",
+								"confirms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "19"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm multiple documents",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ids",
+									"value": "19,20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URI}}/api/borrowers/confirms",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"borrowers",
+								"confirms"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URI}}/api/users",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9zaWduaW4iLCJpYXQiOjE1OTA5NTEwNTksImV4cCI6MTU5MDk1NDY1OSwibmJmIjoxNTkwOTUxMDU5LCJqdGkiOiJVUTVKbU1xd1o4cnVWd3phIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIiwicHJvZmlsZSI6bnVsbCwicm9sZSI6WyJyb290Il0sInBlcm1pc3Npb25zIjpbImNyZWF0ZSBhIGRvY3VtZW50IiwicmVhZCBhIGRvY3VtZW50IiwicmVhZCBkb2N1bWVudHMiLCJ1cGRhdGUgYSBkb2N1bWVudCIsImRlbGV0ZSBhIGRvY3VtZW50IiwiZGVsZXRlIGRvY3VtZW50cyIsImNvbmZpcm0gYSByZXR1cm5lZCBkb2N1bWVudCIsImNvbmZpcm0gcmV0dXJuZWQgZG9jdW1lbnRzIiwiYm9ycm93IGEgZG9jdW1lbnQiLCJib3Jyb3cgZG9jdW1lbnRzIiwicmV0dXJuIGEgZG9jdW1lbnQiLCJyZXR1cm4gZG9jdW1lbnRzIl19.pU2HcLC3SiaRzK6oIESZK5HN6ZSMC0fQV3qVXpFyUV8",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a728d76e-9d05-4a5d-8777-57d5606bd576",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d7121b0b-ae3e-4b13-ad31-71245368f4fc",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "a38ed468-4925-461f-87b5-804414f31c54",
+			"key": "BASE_URI",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
