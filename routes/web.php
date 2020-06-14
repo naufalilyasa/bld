@@ -13,12 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::get('/', function () {
+        return view('home');
+    })->name('home');
 });
 
-// Route untuk daftar dan login
-Route::prefix('auth')->group(function () {
-    Route::get('/signin', 'SignInController@index');
-    Route::get('/signup', 'SignUpController@index');
-});
+
+Route::get('/signin', function () {
+    return view('auth.signin');
+})->name('signin');
+
+Route::get('/signup', function () {
+    return view('auth.signup');
+})->name('signup');
