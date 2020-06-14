@@ -15,37 +15,62 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // Buat user admin
-        DB::table('users')->insert([
-            'name' => 'Super User',
-            'email' => 'root@localhost',
-            'password' => Hash::make('root')
-        ]);
+        DB::transaction(function () {
+            // Buat user admin
+            DB::table('users')->insert([
+                'name' => 'Super User',
+                'email' => 'root@localhost',
+                'password' => Hash::make('root')
+            ]);
 
-        // Tambah role untuk admin
-        $rootRole = Role::findByName('root', 'api');
-        User::where('email', 'root@localhost')->first()->assignRole($rootRole);
+            $getUserIdByEmail = fn (string $email) => DB::table('users')->where('email', $email)->first()->id;
 
-        // Buat user dosen
-        DB::table('users')->insert([
-            'name' => 'Lecturer',
-            'email' => 'lecturer@localhost',
-            'password' => Hash::make('lecturer')
-        ]);
+            DB::table('user_profiles')->insert([
+                'user_id' => $getUserIdByEmail('root@localhost'),
+                'registration_number' => '1',
+                'phone_number' => 'X',
+                'address' => 'X',
+            ]);
 
-        // Tambah role untuk dosen
-        $lecturerRole = Role::findByName('lecturer', 'api');
-        User::where('email', 'lecturer@localhost')->first()->assignRole($lecturerRole);
+            // Tambah role untuk admin
+            $rootRole = Role::findByName('root', 'api');
+            User::where('email', 'root@localhost')->first()->assignRole($rootRole);
 
-        // Buat user mahasiswa
-        DB::table('users')->insert([
-            'name' => 'Student',
-            'email' => 'student@localhost',
-            'password' => Hash::make('student')
-        ]);
+            // Buat user dosen
+            DB::table('users')->insert([
+                'name' => 'Lecturer',
+                'email' => 'lecturer@localhost',
+                'password' => Hash::make('lecturer')
+            ]);
 
-        // Tambah role untuk mahasiswa
-        $lecturerRole = Role::findByName('student', 'api');
-        User::where('email', 'student@localhost')->first()->assignRole($lecturerRole);
+            DB::table('user_profiles')->insert([
+                'user_id' => $getUserIdByEmail('lecturer@localhost'),
+                'registration_number' => '1',
+                'phone_number' => 'Y',
+                'address' => 'Y',
+            ]);
+
+            // Tambah role untuk dosen
+            $lecturerRole = Role::findByName('lecturer', 'api');
+            User::where('email', 'lecturer@localhost')->first()->assignRole($lecturerRole);
+
+            // Buat user mahasiswa
+            DB::table('users')->insert([
+                'name' => 'Student',
+                'email' => 'student@localhost',
+                'password' => Hash::make('student')
+            ]);
+
+            DB::table('user_profiles')->insert([
+                'user_id' => $getUserIdByEmail('student@localhost'),
+                'registration_number' => '1',
+                'phone_number' => 'Z',
+                'address' => 'Z',
+            ]);
+
+            // Tambah role untuk mahasiswa
+            $lecturerRole = Role::findByName('student', 'api');
+            User::where('email', 'student@localhost')->first()->assignRole($lecturerRole);
+        });
     }
 }

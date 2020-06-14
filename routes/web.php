@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route untuk daftar dan login
+Route::prefix('auth')->group(function () {
+    Route::get('/signin', 'SignInController@index');
+    Route::get('/signup', 'SignUpController@index');
+});

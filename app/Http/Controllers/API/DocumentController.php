@@ -22,7 +22,7 @@ class DocumentController extends Controller
         if (is_null($id))
         {
             if ($user->hasPermissionTo('read documents', 'api')) {
-                return new DocumentCollection(Document::paginate());
+                return new DocumentCollection(Document::all());
             }
         } else {
             if ($user->hasPermissionTo('read a document', 'api')) {

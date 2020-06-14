@@ -14,4 +14,8 @@ class Document extends Model
     protected $attributes = [
         'items_available' => 1
     ];
+
+    public function getItemsAvailable() {
+        return (int)$this->items_available - (int)$this->hasMany('App\Borrower', 'document_id')->where('is_borrowed', true)->count();
+    }
 }

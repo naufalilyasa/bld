@@ -60,9 +60,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [
-            'profile' => $this->profile,
             'role' => $this->getRoleNames(),
-            'permissions' => $this->getPermissionsViaRoles()->pluck('name')
+            'permissions' => $this->getPermissionsViaRoles()->pluck('name'),
+            'profile' => $this->profile,
+            'user' => collect($this->toArray())->except(['email_verified_at', 'created_at', 'updated_at', 'roles', 'profile'])
         ];
     }
 
