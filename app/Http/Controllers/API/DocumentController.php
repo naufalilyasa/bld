@@ -8,8 +8,10 @@ use App\Http\Requests\API\StoreDocumentRequest;
 use App\Http\Requests\API\UpdateDocumentRequest;
 use App\Http\Requests\API\DestroyDocumentRequest;
 use App\Http\Resources\API\DocumentCollection;
+use App\Http\Resources\API\DocumentResource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
@@ -22,11 +24,29 @@ class DocumentController extends Controller
         if (is_null($id))
         {
             if ($user->hasPermissionTo('read documents', 'api')) {
-                return new DocumentCollection(Document::all());
+                $documents = DB::table('documents as d')
+                               ->leftJoin('borrowers as b', 'd.id', '=', 'b.document_id')
+                               ->select(
+                                 DB::raw('d.*, (d.items_available - COUNT(b.document_id)) AS items_left, GROUP_CONCAT(b.borrower_id) AS borrowers, GROUP_CONCAT(b.return_status) AS borrowers_return_status')
+                               )
+                               ->groupBy('d.id')
+                               ->get();
+
+                return new DocumentCollection($documents);
             }
         } else {
+            $document = DB::table('documents as d')
+                          ->leftJoin('borrowers as b', 'd.id', '=', 'b.document_id')
+                          ->select(
+                            DB::raw('d.*, (d.items_available - COUNT(b.document_id)) AS items_left, GROUP_CONCAT(b.borrower_id) AS borrowers, GROUP_CONCAT(b.return_status) AS borrowers_return_status')
+                          )
+                          ->where('d.id', $id)
+                          ->groupBy('d.id')
+                          ->first();
             if ($user->hasPermissionTo('read a document', 'api')) {
-                return Document::where('id', $id)->firstOrFail();
+                $doc = new DocumentResource($document);
+                $doc = collect($doc);
+                return response()->json($doc);
             }
         }
 
